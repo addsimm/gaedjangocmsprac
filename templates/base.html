@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head lang = "en">
+	<meta charset = "UTF-8">
+	{# <link rel = "stylesheet" href = "style.css"/>                                     need to create CSS #}
+	<title>{% block title %}CMS | {{ page_name }}{% endblock %}</title>                  {# Giving blockname is key #}
+	<h1>Practice Content Management System</h1>
+		<br>
+		<hr>
+		<br>
+	<p>
+		{% if user %}
+			<h1>Welcome {{ user }}!</h1>
+		{% else %}
+			<h1>Welcome! Please sign in:</h1>
+		{% endif %}
+	</p>
+	<p>
+		<a href = "{{ url|safe }}">Click here to {{ url_linktext }}.</a>
+	</p>
+	<p>
+		<br>
+		<hr>
+		<br>
+	</p>
+</head>
+
+<body>
+    <div id = "sidebar">
+        {% block sidebar %}
+	        <ul>
+                <li><a href = "/">Home</a></li>
+                <li><a href = "/blog/">Blog</a></li>
+            </ul>
+        {% endblock %}
+    </div>
+
+    <div id = "content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
