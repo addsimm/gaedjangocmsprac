@@ -1,13 +1,14 @@
 # Create your views here.
 
 import datetime
+from socket import gethostname
 
 from django.shortcuts import render_to_response
 from google.appengine.api import users
 
 
 def return_template_values(path):
-    now = datetime.datetime.now()
+
     if users.get_current_user():
         url = users.create_logout_url(path)
         url_linktext = 'sign out'
@@ -17,9 +18,13 @@ def return_template_values(path):
         url_linktext = 'sign in'
         template_values = {}
 
+    now = datetime.datetime.now()
+    host = gethostname()
     template_values.update({'url': url,
                             'url_linktext': url_linktext,
                             'now': now,
+                            'host': host,
+                            'path': path
     })
 
     return template_values

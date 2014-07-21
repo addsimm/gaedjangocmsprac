@@ -1,21 +1,14 @@
 <!DOCTYPE html>
-<html >
-	{% extends "base.html" %}
+<html>
+	{% extends "base/base.html" %}
 
-    <head lang = "en" >
-        <meta charset = "UTF-8" >
-        <title >Practice CMS Home</title >
-    </head >
-    <body >
-        <br>
-        <p > Welcome to the jungle!</p >
-        <br>
-        <p>{{ now }}</p>
-        <br>
-        <p >Have a great day!</p >
-        <br>
-        <p>
-        <a href="/create_flatpage/" type="">Click to create a flatpage!</a>
-        </p>
-    </body >
-</html >
+    <body>
+	    {% block content %}
+		    <p> Welcome to the jungle!</p>
+		    <p>Have a great day!</p>
+		    <p>
+            <a href = "/create_flatpage/" type = "">Click to create a flatpage!</a>
+            </p>
+	    {% endblock content %}
+    </body>
+</html>
