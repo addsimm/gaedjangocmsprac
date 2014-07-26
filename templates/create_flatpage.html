@@ -1,13 +1,32 @@
 <!DOCTYPE html>
-<html >
-    <head lang = "en" >
-        <meta charset = "UTF-8" >
-        <title >Practice CMS Home</title >
-    </head >
-    <body >
+<html lang = "en">
+
+	{% extends "base/base.html" %}
+	{%  block header %}
+			<script type = "text/javascript" src = "/js/tinymce/tinymce.min.js"></script>
+			<script type = "text/javascript">
+				tinyMCE.init({
+					selector: "textarea"
+					});
+			</script>
+	{%  endblock header  %}
+	<body>
+	{% block content %}
+
+        <hr>
+        <p> Create a flatpage:</p>
         <br>
-        <p > Create a flatpage:</p >
-        <br>
-        <p >Have a great day!</p >
-    </body >
-</html >
+		<form action = "create_flatpage" method = "POST">
+			<p>Title: <input type="text" name="title"></p><br>
+			<p>Content: <textarea name = "content"></textarea></p><br>
+			<p><input type="hidden" name="author" value={{ user }}></p>
+			<p><input type = "submit" value = "Create"></p>
+		</form>
+        <p>Have a great day!</p>
+		<br>
+		<a href = "/">Click to return home.</a>
+		<br>
+
+	{% endblock content %}
+    </body>
+</html>

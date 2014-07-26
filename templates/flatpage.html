@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+	{% extends "base/base.html" %}
+
+	<body>
+	{% block content %}
+        <h3>Flatpage: {{ page_name }}</h3>
+		Author: {{ flatpage.fp_author }}
+        <br>
+		Content: {{ flatpage.fp_content | safe}}<br>
+		<br>
+		Created: {{ flatpage.fp_date_created }}<br>
+		<br>
+		<a href = "/">Click to return to homepage.</a><br>
+		<br>
+	{% endblock content %}
+    </body>
+</html>

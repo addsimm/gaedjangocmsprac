@@ -4,11 +4,20 @@
 
     <body>
 	    {% block content %}
-		    <p> Welcome to the jungle!</p>
-		    <p>Have a great day!</p>
+		    <p> Pick a flatpage:</p>
+		    {%  for flatpage in flatpages  %}
+			    <ul>
+			    <li><a href = "display_flatpage/?{{ flatpage.key.id }}">{{ flatpage.key.id }}</a></li>
+		    </ul>
+
+		    {%  endfor %}
+		    <br>
+		    or
+		    <br>
 		    <p>
-            <a href = "/create_flatpage/" type = "">Click to create a flatpage!</a>
+            <a href = "/create_flatpage/">Click to create a flatpage!</a>
             </p>
+		    <p>Have a great day!</p>
 	    {% endblock content %}
     </body>
 </html>

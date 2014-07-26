@@ -4,10 +4,14 @@
 {# <link rel = "stylesheet" href = "style.css"/>  #}
 
 ** Header: (header.html)<br>
-{%  include 'base/header.html' %}
-<br>
+<head>
+	{%  include 'base/header.html' %}
+	{%  block header %}{% endblock header %}
+</head>
 ** End Header<br>
-
+<br>
+<hr>
+<br>
 <body>
 <br>
 ** Sidebar:<br>
@@ -22,7 +26,8 @@
 ** End Sidebar<br>
 
 <br>
-
+<hr>
+<br>
 ** Content:<br>
     <div id = "content">
         {% block content %}{% endblock %}
@@ -31,7 +36,9 @@
 <br>
 
 </body>
-
+<br>
+<hr>
+<br>
 ** Footer: (footer.html)<br>
 {% include 'base/footer.html' %}
 <br>
