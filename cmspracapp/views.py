@@ -2,15 +2,13 @@
 
 import datetime
 from socket import gethostname
+import urllib2
 
 from django.shortcuts import render_to_response, redirect
 from django.views.decorators.csrf import csrf_exempt
-from django.core.context_processors import csrf
-
 from google.appengine.api import users
 
-from models import *
-import urllib2
+from gaedjangocmsprac.models import *
 
 
 def return_template_values(path):
@@ -38,11 +36,24 @@ def return_template_values(path):
 def home(request):
     path = request.get_full_path()
     page_name = 'Home'
-    flatpages_query = Flatpage.query(ancestor=flatpages_key())
-    flatpages = flatpages_query.fetch(20)
+    print(request.get_host())
+    search_string = ''
+    flatpages_key_query = Flatpage.query(ancestor=flatpages_key())
+    flatpages_keys = flatpages_key_query.fetch(20, keys_only=True)
+
+    if 'q' in request.GET and (request.GET['q'] != 'search' or request.GET['q'] != ''):
+        search_string = request.GET['q']
+        flatpages = ndb.get_multi(flatpages_keys)
+        flatpages_keys = []
+        for flatpage in flatpages:
+            if search_string.lower() in flatpage.fp_content.lower():
+                flatpages.remove(flatpage)
+                flatpages_keys.append(flatpage.key)
+
     template_values = return_template_values(path)
     template_values.update({'page_name': page_name,
-                            'flatpages': flatpages,
+                            'search_string': search_string,
+                            'flatpages_keys': flatpages_keys,
     })
     return render_to_response('home.html', template_values)
 

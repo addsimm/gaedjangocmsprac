@@ -1,17 +1,27 @@
 <!DOCTYPE html>
-<html>
+<html xmlns = "http://www.w3.org/1999/html">
 	{% extends "base/base.html" %}
 
     <body>
 	    {% block content %}
-		    <p> Pick a flatpage:</p>
-		    {%  for flatpage in flatpages  %}
-			    <ul>
-			    <li><a href = "display_flatpage/?{{ flatpage.key.id }}">{{ flatpage.key.id }}</a></li>
-		    </ul>
-
-		    {%  endfor %}
 		    <br>
+		    <p>
+		    <form action = "/" method = "get">
+		        Search flatpages: <input type = "text" name = "q" value = "search">
+		        <input type = "submit" value = "Submit">
+		    </form>
+		    </p>
+		    <p>Or pick a flatpage:</p>
+		    {%  if search_string  %}
+		       <p>*** Note: search string active: {{  search_string }} ***</p>
+		    {%  endif %}
+
+		    {%  for flatpage_key in flatpages_keys  %}
+			    <ul>
+			    <li><a href = "display_flatpage/?{{ flatpage_key.id }}">{{ flatpage_key.id }}</a></li>
+			    </ul>
+		    {%  endfor %}
+
 		    or
 		    <br>
 		    <p>

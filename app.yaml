@@ -2,9 +2,13 @@ application:  gae-django-cms-prac
 version: 1
 runtime: python27
 api_version: 1
-threadsafe: true
+threadsafe: true # change back to true
 
 handlers:
+
+- url: /admin/.*
+  script: google.appengine.ext.admin.application
+  login: admin
 
 - url: /js
   static_dir: js
